@@ -1,0 +1,28 @@
+//_ перед названием - говорю, что это кусок стилей
+html{
+  font-size: 62.5%
+}
+
+body{
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: $m-size;
+  background-color: white;
+}
+
+h1 {
+  font-size: 2.2rem
+}
+
+.is-active{
+  font-weight: bold;
+}
+
+
+//настраиваю курсор для кнопок
+button{
+  cursor: pointer;
+}
+
+button:disabled{
+  cursor:default;
+}
