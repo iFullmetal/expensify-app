@@ -15,7 +15,7 @@ module.exports = (env)=>{
         //entry: './src/playground/redux-expensify.js',
 
         output: {
-            path: path.join(__dirname, '/public'),
+            path: path.join(__dirname, '/public/dist'),
             filename: 'bundle.js'
         },
         watch: true,
@@ -78,10 +78,13 @@ module.exports = (env)=>{
         //удобный сервак, который сразу запускает webpack
         //но при этом bundle у него не физический, т.е. лежит в оперативе, а не в файле, чтобы быстрее работало
         devServer: {
-            contentBase: path.join(__dirname, '/public'),
+            contentBase: path.join(__dirname, '/public/dist'),
             //для работы client-side routing'а нужно, чтобы сервер выдавал дефолтный index.html на любой запрос
             //и реакт уже сам соображала, что там рисовать по адрессной строке
-            historyApiFallback:true
+            historyApiFallback: true,
+            //говорю серву, где искать bundle
+            //publicPath:'/dist/',
+
         },
     };
 };

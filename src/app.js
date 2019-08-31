@@ -8,12 +8,11 @@ import configureStore from "./store/configureStore";
 import { addExpense } from "./actions/expenses";
 import { setTextFilter } from "./actions/filters";
 import getVisibleExpenses from "./selectors/expenses";
-
-//инициализирую react-dates
-import 'react-dates/initialize';
-
 //'reset' - штука, которая сносит дефолтные стили браузера, которые у всех браузеров разные
 import 'normalize.css/normalize.css'
+//инициализирую react-dates
+import 'react-dates/initialize';
+import 'react-dates/lib/css/_datepicker.css';
 //гружу стили, а вебпак знает, что с ними делать, т.к. я ему это сказал в конфиге, а конфигу я все сказал в конфиге конфига, которому я.....
 import './styles/styles.scss'
 
