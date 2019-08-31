@@ -41,7 +41,7 @@ module.exports = (env)=>{
                     use: ['style-loader','css-loader', 'sass-loader']
                 },
 
-                //гружу стили в отдельный css файл
+                // //гружу стили в отдельный css файл
                 // {
                 //     test: /\.s?css$/,
                 //     //говорю вебпаку грузить css/scss через эти npm модули
