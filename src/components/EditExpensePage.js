@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import ExpenseForm from './ExpenseForm'
-import { editExpense } from "../actions/expenses";
-import { removeExpense } from "../actions/expenses";
+//import { editExpense } from "../actions/expenses";
+import { startRemoveExpense, startEditExpense } from "../actions/expenses";
 
 const EditExpensePage = (props)=> {
     //т.к. этот компонент вызывается через React Router, то и params он сюда присылает свой
@@ -14,14 +14,14 @@ const EditExpensePage = (props)=> {
 
             <ExpenseForm
                 onSubmit={(expense)=>{
-                    props.dispatch(editExpense(props.expense.id, expense));
+                    props.dispatch(startEditExpense(props.expense.id, expense));
                     props.history.push('/');
                 }}
                 expense={props.expense}
             />
 
             <button onClick={()=>{
-                props.dispatch(removeExpense(props.expense));
+                props.dispatch(startRemoveExpense(props.expense));
                 props.history.push('/');
             }}>Remove</button>
 

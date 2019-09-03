@@ -2,6 +2,7 @@ const path = require('path'); //вебпак интерпритируется н
 const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // для раздельной компиляции css и js
 
 
+
 //entry -> output
 
 //тут нужно сказать webpack'у что ему транслировать(интерпритировать? компилировать? транспилировать?) и куда
@@ -18,7 +19,7 @@ module.exports = (env)=>{
             path: path.join(__dirname, '/public/dist'),
             filename: 'bundle.js'
         },
-        watch: true,
+        watch: !isProduction,
 
         module:{
             rules:[

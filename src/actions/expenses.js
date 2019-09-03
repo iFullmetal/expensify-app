@@ -27,8 +27,8 @@ export const startAddExpense = (expenseData = {})=>{
             amount,
             createdAt
         };
-        //вот теперь можно диспатчить этот экспенс в redux-state
-        database.ref('expenses').push(expense).then((ref)=>{
+        //вот теперь можно диспатчить этот экспенс в redux-state, возвращая промис, который приходит из обращения к бд
+        return database.ref('expenses').push(expense).then((ref)=>{
             dispatch(addExpense({
                 id: ref.key, //id документа в бд
                 ...expense
@@ -46,6 +46,15 @@ export const removeExpense = ({ id } = {})=>(
     }
 );
 
+//удаляет экспенс из бд, потом уже из стейта. асинхронная, возвращает промис
+export const startRemoveExpense = ({ id } = {})=>{
+    return (dispatch)=>{
+        return database.ref(`expenses/${id}`).remove().then(()=>{
+            dispatch(removeExpense({ id }));
+        })
+    };
+};
+
 //EDIT_EXPENSE
 
 export const editExpense = (id, updates)=>({
@@ -53,3 +62,38 @@ export const editExpense = (id, updates)=>({
     id,
     updates
 });
+
+export const startEditExpense = (id, updates)=>{
+    return (dispatch)=>{
+        return database.ref(`expenses/${id}`).set({
+            ...updates
+        }).then(()=>{
+            dispatch(editExpense(id, updates));
+        })
+    };
+};
+
+//SET_EXPENSE
+
+export const setExpense = (expenses)=>({
+    type: 'SET_EXPENSES',
+    expenses
+});
+
+//берет из бд все экспенсы  и пихает их в redux стейты
+export const startSetExpenses = ()=>{
+    return (dispatch)=>{
+        return database.ref('expenses').once('value').then((snapshot)=>{
+            //перевожу дибильный firebase массив в нормальный человеческий вид
+            const expenses = [];
+            snapshot.forEach((childSnapshot)=>{
+               expenses.push({
+                   id: childSnapshot.key,
+                   ...childSnapshot.val()
+               })
+            });
+            //диспатчу экспенсы в стейт
+            dispatch(setExpense(expenses));
+        })
+    }
+};
