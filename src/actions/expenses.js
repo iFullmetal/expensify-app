@@ -11,7 +11,7 @@ export const addExpense = (expense)=>({
 //thunk-action, теперь action возвращает функцию, что-то типа middleware, с которым я могу слать стейты(обработанные
 //в редюсере) в базу данных
 export const startAddExpense = (expenseData = {})=>{
-    return (dispatch)=>{
+    return (dispatch, getState)=>{
         //деструктурирую expense, который создал юзер
         const {
             description = '',
@@ -27,8 +27,10 @@ export const startAddExpense = (expenseData = {})=>{
             amount,
             createdAt
         };
-        //вот теперь можно диспатчить этот экспенс в redux-state, возвращая промис, который приходит из обращения к бд
-        return database.ref('expenses').push(expense).then((ref)=>{
+
+        //пушу экспенс в массив экспенсов юзера, id которого лежит в auth стейте
+        return database.ref(`users/${getState().auth.uid}/expenses`).push(expense).then((ref)=>{
+            //вот теперь можно диспатчить этот экспенс в redux-state, возвращая промис, который приходит из обращения к бд
             dispatch(addExpense({
                 id: ref.key, //id документа в бд
                 ...expense
@@ -48,8 +50,8 @@ export const removeExpense = ({ id } = {})=>(
 
 //удаляет экспенс из бд, потом уже из стейта. асинхронная, возвращает промис
 export const startRemoveExpense = ({ id } = {})=>{
-    return (dispatch)=>{
-        return database.ref(`expenses/${id}`).remove().then(()=>{
+    return (dispatch, getState)=>{
+        return database.ref(`users/${getState().auth.uid}/expenses/${id}`).remove().then(()=>{
             dispatch(removeExpense({ id }));
         })
     };
@@ -80,10 +82,10 @@ export const setExpense = (expenses)=>({
     expenses
 });
 
-//берет из бд все экспенсы  и пихает их в redux стейты
+//берет из бд все экспенсы юзера и пихает их в redux стейты
 export const startSetExpenses = ()=>{
-    return (dispatch)=>{
-        return database.ref('expenses').once('value').then((snapshot)=>{
+    return (dispatch, getState)=>{
+        return database.ref(`users/${ getState().auth.uid }/expenses`).once('value').then((snapshot)=>{
             //перевожу дибильный firebase массив в нормальный человеческий вид
             const expenses = [];
             snapshot.forEach((childSnapshot)=>{
