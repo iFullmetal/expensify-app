@@ -22,45 +22,52 @@ class ExpenseListFilters extends React.Component {
 
     render(){
         return (
-            <div>
-
-                <input
-                    type='text'
-                    value={this.props.filter.text}
-                    onChange={(event)=>{
-                        //диспатчу новый текстовый фильтер в стор
-                        this.props.dispatch(setTextFilter(event.target.value))
-                    }}/>
-
-                {//controlled input - когда значение html элемента управляется с помощью js
-                }
-
-                <select
-                    value={this.props.filter.sortBy}
-                    onChange={(event)=>{
-                        if(event.target.value === 'date'){
-                            this.props.dispatch(sortByDate())
-                        }
-                        else{
-                            this.props.dispatch(sortByAmount())
-                        }
-                    }}>
-                    <option value='date'>Date</option>
-                    <option value='amount'>Amount</option>
-                </select>
-                <DateRangePicker
-                    startDate={this.props.filter.startDate}
-                    startDateId='start_date'
-                    endDate={this.props.filter.endDate}
-                    endDateId='end_date'
-                    onDatesChange={this.onDateChange}
-                    focusedInput={this.state.calendarFocused}
-                    onFocusChange={this.onFocusChange}
-                    isOutsideRange={(day) => false}
-                    numberOfMonths={1}
-                    //кнопка очистки дат
-                    showClearDates={true}
-                />
+            <div className='content-container'>
+                <div className='input-group'>
+                    <div className='input-group__item'>
+                        <input
+                            className='text-input'
+                            placeholder='Search expenses'
+                            type='text'
+                            value={this.props.filter.text}
+                            onChange={(event)=>{
+                                //диспатчу новый текстовый фильтер в стор
+                                this.props.dispatch(setTextFilter(event.target.value))
+                            }}
+                        />
+                    </div>
+                    <div className='input-group__item'>
+                        <select
+                            className='select'
+                            value={this.props.filter.sortBy}
+                            onChange={(event)=>{
+                                if(event.target.value === 'date'){
+                                    this.props.dispatch(sortByDate())
+                                }
+                                else{
+                                    this.props.dispatch(sortByAmount())
+                                }
+                            }}>
+                            <option value='date'>Date</option>
+                            <option value='amount'>Amount</option>
+                        </select>
+                    </div>
+                    <div className='input-group__item'>
+                        <DateRangePicker
+                            startDate={this.props.filter.startDate}
+                            startDateId='start_date'
+                            endDate={this.props.filter.endDate}
+                            endDateId='end_date'
+                            onDatesChange={this.onDateChange}
+                            focusedInput={this.state.calendarFocused}
+                            onFocusChange={this.onFocusChange}
+                            isOutsideRange={(day) => false}
+                            numberOfMonths={1}
+                            //кнопка очистки дат
+                            showClearDates={true}
+                        />
+                    </div>
+                </div>
             </div>
         )
     }

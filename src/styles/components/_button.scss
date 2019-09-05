@@ -1,0 +1,16 @@
+.button {
+  background: $blue;
+  color: white;
+  border: none;
+  padding: $s-size;
+  font-weight: 300;
+  font-size: $font-size-large;
+  //т.к. использую этот класс не только на кнопках, но и на Link'ах, то нужно избавиться от их стандартных стилей
+  display: inline-block;
+  text-decoration: none;
+  line-height: 1;
+}
+
+.button--link {
+  background: none;
+}

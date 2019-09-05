@@ -97,6 +97,7 @@ class ExpenseForm extends React.Component {
                 <form onSubmit={this.onSubmit}>
 
                     <input
+                        className='text-input'
                         type='text'
                         placeholder='Description'
                         //при переходе на эту страницу сразу поставит фокус на элемент
@@ -105,6 +106,7 @@ class ExpenseForm extends React.Component {
                         onChange={this.onDescriptionChange}
                     />
                     <input
+                        className='text-input'
                         type='text'
                         placeholder='Amount'
                         value={this.state.amount}
@@ -126,6 +128,7 @@ class ExpenseForm extends React.Component {
                     {//textarea - многострочный инпут, типа текстбокса
                     }
                     <textarea
+                        className='textarea'
                         placeholder='Add a note for your expense (optional)'
                         value={this.state.note}
                         onChange={this.onNoteChange}

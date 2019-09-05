@@ -42,7 +42,6 @@ firebase.auth().onAuthStateChanged((user) => {
     //user != undefined => он залогинился
     if(user){
         //диспатчу auth token в стейты
-        console.log(user);
         store.dispatch(login(user.uid));
         //рисую само приложение только после того, как все необходимые данные с бд пришли
         store.dispatch(startSetExpenses()).then(()=>{

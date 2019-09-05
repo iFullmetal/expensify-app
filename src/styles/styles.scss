@@ -1,5 +1,13 @@
 @import './base/_settings'; // переменные от сюда теперь будут доступны в области видимости всех импортированных далее файлов
 @import './base/_base';
 //дальше @import стилей компонентов....
+@import './components/_box-layout';
+@import './components/_button';
+@import './components/_header';
+@import './components/_content-container';
+@import './components/_page-header';
+@import './components/_input-group';
+@import './components/_inputs';
 
 //scss/sass - препроцессор css для всяких колдунчеств с css типа переменных, разделения на файлы, функций
+

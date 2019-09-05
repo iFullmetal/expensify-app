@@ -7,9 +7,8 @@ console.log('test');
 
 const ExpenseDashboardPage = ()=>(
     <div>
-        <p>Dashboard page</p>
-        <ExpenseListFilters/>
         <ExpensesSummary/>
+        <ExpenseListFilters/>
         <ExpenseList/>
     </div>
 );
