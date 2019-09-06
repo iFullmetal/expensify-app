@@ -1,0 +1,18 @@
+.show-for-mobile {
+
+  //если не мобильный экран
+
+  //width >= desktopWidth
+  @media (min-width: $desktop-breakpoint){
+    //не рисую этот элемент
+    display: none;
+  }
+}
+
+.show-for-desktop {
+
+  //width < desktopWidth
+  @media (max-width: $desktop-breakpoint - 0.1rem){
+    display: none;
+  }
+}

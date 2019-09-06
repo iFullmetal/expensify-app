@@ -4,8 +4,12 @@ import ExpenseListItem from "./ExpenseListItem";
 import getVisibleExpenses from "../selectors/expenses";
 
 const ExpenseList = (props)=>(
-  <div>
-      <h1>ExpenseList</h1>
+  <div className='content-container'>
+      <div className='list-header'>
+          <div className='show-for-mobile'>Expenses</div>
+          <div className='show-for-desktop'>Expense</div>
+          <div className='show-for-desktop'>Amount</div>
+      </div>
       {
           //рисую отфильтрованные затраты
           getVisibleExpenses(props.expenses, props.filter).map((expense, index)=>
@@ -17,13 +21,12 @@ const ExpenseList = (props)=>(
   </div>
 );
 
-
-//размечаю, к каким редюсерам у компонента будет доступ
 const mapStateToProps = (state)=> {
     return {
         expenses: state.expenses,
         filter: state.filter
     }
+//размечаю, к каким редюсерам у компо
 }
 
 //коннекчу компонент к редукс стору, если он в <Provider>,

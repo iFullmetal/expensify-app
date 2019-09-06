@@ -5,15 +5,21 @@ import { startAddExpense } from "../actions/expenses";
 
 const AddExpensePage = (props) => (
     <div>
-        <h1>Add Expense</h1>
-        <ExpenseForm
-            onSubmit={(expense)=>{
-                //диспатчу action с middleware, который заодно шлет expense на бд после валидации reducer'ом
-                props.dispatch(startAddExpense(expense));
-                //редирукчу на страницу с затрами по browser routingовому.
-                props.history.push('/');
-            }}
-        />
+        <div className="page-header">
+            <div className="content-container">
+                <h1 className='page-header__title'>Add Expense</h1>
+            </div>
+        </div>
+        <div className='content-container'>
+            <ExpenseForm
+                onSubmit={(expense)=>{
+                    //диспатчу action с middleware, который заодно шлет expense на бд после валидации reducer'ом
+                    props.dispatch(startAddExpense(expense));
+                    //редирукчу на страницу с затрами по browser routingовому.
+                    props.history.push('/');
+                }}
+            />
+        </div>
     </div>
 );
 

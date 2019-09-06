@@ -13,7 +13,7 @@ class ExpenseForm extends React.Component {
         super(props);
 
         const { expense } = props;
-        if(expense) this.submitButtonText = 'Edit expense'
+        if(expense) this.submitButtonText = 'Save expense';
         this.state = {
             description: expense ? expense.description : '',
             note: expense ? expense.note : '',
@@ -92,51 +92,52 @@ class ExpenseForm extends React.Component {
 
     render(){
         return (
-            <div>
-                {this.state.error ? <p>{this.state.error}</p> : undefined}
-                <form onSubmit={this.onSubmit}>
+            <form className='form' onSubmit={this.onSubmit}>
+                {this.state.error ? <p className='form__error'>{this.state.error}</p> : undefined}
+                <input
+                    className='text-input'
+                    type='text'
+                    placeholder='Description'
+                    //при переходе на эту страницу сразу поставит фокус на элемент
+                    autoFocus={true}
+                    value={this.state.description}
+                    onChange={this.onDescriptionChange}
+                />
+                <input
+                    className='text-input'
+                    type='text'
+                    placeholder='Amount'
+                    value={this.state.amount}
+                    onChange={this.onAmountChange}
+                />
 
-                    <input
-                        className='text-input'
-                        type='text'
-                        placeholder='Description'
-                        //при переходе на эту страницу сразу поставит фокус на элемент
-                        autoFocus={true}
-                        value={this.state.description}
-                        onChange={this.onDescriptionChange}
-                    />
-                    <input
-                        className='text-input'
-                        type='text'
-                        placeholder='Amount'
-                        value={this.state.amount}
-                        onChange={this.onAmountChange}
-                    />
+                <SingleDatePicker
+                    date={this.state.createdAt}
+                    onDateChange={this.onDateChange}
+                    //при клике на компонент
+                    focused={this.state.datePickerFocused}
+                    //вызывается при выходе из этого окошка
+                    onFocusChange={this.onFocusChange}
+                    numberOfMonths={1}
+                    //чтобы можно было выбирать любой день
+                    isOutsideRange={(day) => false}
+                />
 
-                    <SingleDatePicker
-                        date={this.state.createdAt}
-                        onDateChange={this.onDateChange}
-                        //при клике на компонент
-                        focused={this.state.datePickerFocused}
-                        //вызывается при выходе из этого окошка
-                        onFocusChange={this.onFocusChange}
-                        numberOfMonths={1}
-                        //чтобы можно было выбирать любой день
-                        isOutsideRange={(day) => false}
-                    />
-
-                    {//textarea - многострочный инпут, типа текстбокса
-                    }
-                    <textarea
-                        className='textarea'
-                        placeholder='Add a note for your expense (optional)'
-                        value={this.state.note}
-                        onChange={this.onNoteChange}
-                    >
-                    </textarea>
-                    <button>{this.submitButtonText}</button>
-                </form>
-            </div>
+                {//textarea - многострочный инпут, типа текстбокса
+                }
+                <textarea
+                    className='textarea'
+                    placeholder='Add a note for your expense (optional)'
+                    value={this.state.note}
+                    onChange={this.onNoteChange}
+                >
+                </textarea>
+                {/*пихаю кнопку в отдельный див, чтобы она не флексмлась и не ставала во сю длину
+                (т.е. content-container не применяется)*/}
+                <div>
+                    <button className='button'>{this.submitButtonText}</button>
+                </div>
+            </form>
         );
     };
 };
