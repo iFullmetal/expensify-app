@@ -10,21 +10,25 @@ const ExpenseList = (props)=>(
           <div className='show-for-desktop'>Expense</div>
           <div className='show-for-desktop'>Amount</div>
       </div>
-      {
-          //рисую отфильтрованные затраты
-          getVisibleExpenses(props.expenses, props.filter).map((expense, index)=>
-              <ExpenseListItem
-                  expense={expense}
-                  key={index}
-              />)
-      }
+      <div className='list-item__body'>
+          {
+              props.expenses.length === 0 ?
+                  ( <p className='list-item list-item--message'>No expenses</p> ) :
+                  //рисую отфильтрованные затраты
+                  (props.expenses.map((expense, index)=>
+                      <ExpenseListItem
+                          expense={expense}
+                          key={index}
+                      />))
+          }
+      </div>
   </div>
 );
 
+//в пропах будут лежать уже отфильтрованные экспенсы
 const mapStateToProps = (state)=> {
     return {
-        expenses: state.expenses,
-        filter: state.filter
+        expenses: getVisibleExpenses(state.expenses, state.filter),
     }
 //размечаю, к каким редюсерам у компо
 }

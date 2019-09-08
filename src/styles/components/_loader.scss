@@ -1,0 +1,12 @@
+.loader {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center; //центрю по y
+  justify-content: center; //центрю по x
+}
+
+.loader__image {
+  height: 6rem;
+  width: 6rem;
+}

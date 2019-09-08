@@ -17,6 +17,8 @@ import './styles/styles.scss';
 //подключаюсь к бд
 import { firebase } from './firebase/firebase';
 
+import LoadingPage from './components/LoadingPage';
+
 const store = configureStore();
 
 const jsx = (
@@ -35,7 +37,7 @@ const renderApp = ()=>{
   }
 };
 
-reactDOM.render(<p>loading...</p> , document.getElementById('app'));
+reactDOM.render(<LoadingPage/> , document.getElementById('app'));
 
 //обработка событий log in/ log out
 firebase.auth().onAuthStateChanged((user) => {
